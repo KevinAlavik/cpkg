@@ -27,7 +27,7 @@ Change the **headerDir** to the directory where the header files are located.
 
 Then go into source.json and add this (change the values to match your package)
 
-```jsonc
+```json
 {
     "packages": [
         {
