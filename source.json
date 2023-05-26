@@ -1,0 +1,8 @@
+{
+    "packages": [
+        {
+            "name": "test-pkg",
+            "source": "https://puffer.is-a.dev/cpkg/test-pkg/source.cpkg"
+        }
+    ]
+}
