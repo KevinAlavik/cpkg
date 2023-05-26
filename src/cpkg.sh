@@ -101,6 +101,7 @@ if [ "$1" == "install" ]; then
     fi
 
     install_package "$packageName" "$outputDirectory" "$source"
+    rm source.json
 elif [ "$1" == "--help" ]; then
     show_help
 else
