@@ -67,6 +67,7 @@ function install_package {
     fi
 
     echo "Package installation complete."
+    
     rm "$packageFile"
 }
 
@@ -101,6 +102,7 @@ if [ "$1" == "install" ]; then
     fi
 
     install_package "$packageName" "$outputDirectory" "$source"
+    cd ..
     rm source.json
 elif [ "$1" == "--help" ]; then
     show_help
