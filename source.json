@@ -7,6 +7,10 @@
         {
             "name": "test-pkg2",
             "source": "https://puffer.is-a.dev/cpkg/packages/test-pkg2/cpkg-pack.json"
+        },
+        {
+            "name": "colors",
+            "source": "https://puffer.is-a.dev/cpkg/packages/colors/cpkg-pack.json"
         }
     ]
 }

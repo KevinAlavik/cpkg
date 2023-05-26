@@ -8,9 +8,9 @@ bash -c "$(curl -fsSL https://puffer.is-a.dev/cpkg/install.sh)"
 ```
 
 ## Packages
-Atm there is only two packages:
 - test-pkg
 - test-pkg2
+- colors
 
 ## Adding Packages
 To add a package you will need to fork this repository. Then create an directory inside of the **packages/** directory, call the folder the name of your package. Inside of the package folder you need to add your header files (prefarable in an folder called like **lib/**, if you have documentation add that inside the main package directory. Then add a **cpkg-pack.json** file and the file should look something like this:
