@@ -37,7 +37,7 @@ function install_package {
 
     # Download the source file using curl
     packageFile="cpkg-pack.json"
-    curl -s "$source"
+    curl -s "$source" -o "$packageFile"
 
     if [ ! -s "$packageFile" ]; then
         echo "Failed to download the package file: $packageFile"

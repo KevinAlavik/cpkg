@@ -1,5 +1,6 @@
 {
+    "headerDir": "lib/",
     "headerFiles": [
-        "lib/test.h"
+        "test.h"
     ]
 }
