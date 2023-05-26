@@ -1,0 +1,6 @@
+{
+    "headerDir": "lib/",
+    "headerFiles": [
+        "test2.h"
+    ]
+}

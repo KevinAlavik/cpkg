@@ -2,7 +2,11 @@
     "packages": [
         {
             "name": "test-pkg",
-            "source": "https://puffer.is-a.dev/cpkg/test-pkg/cpkg-pack.json"
+            "source": "https://puffer.is-a.dev/cpkg/packages/test-pkg/cpkg-pack.json"
+        },
+        {
+            "name": "test-pkg2",
+            "source": "https://puffer.is-a.dev/cpkg/packages/test-pkg2/cpkg-pack.json"
         }
     ]
 }
