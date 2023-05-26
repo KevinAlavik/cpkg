@@ -1,4 +1,5 @@
 #!/bin/bash
+# CPKG Source Code
 
 packageSource="https://puffer.is-a.dev/cpkg/source.json"
 
@@ -23,7 +24,6 @@ function install_package {
     packageName=$1
     outputDirectory=$2
     source=$3
-
     echo "Installing package: $packageName"
 
     if [ -z "$outputDirectory" ]; then
@@ -36,26 +36,42 @@ function install_package {
     fi
 
     # Download the source file using curl
-    curl -s "$source" -o package.cpkg
+    packageFile="cpkg-pack.json"
+    curl -s "$source"
 
-    # Get the headerDir value from package.cpkg
-    headerDir=$(jq -r '.headerDir' package.cpkg)
-    if [ -z "$headerDir" ]; then
-        echo "Error: headerDir value not found in the package source file. Invalid Package"
+    if [ ! -s "$packageFile" ]; then
+        echo "Failed to download the package file: $packageFile"
         exit 1
     fi
 
-    # Replace the filename with the headerDir value in the source URL
-    source="${source%/*}/$headerDir"
+    headerDir=$(jq -r '.headerDir' "$packageFile")
+    if [ -z "$headerDir" ]; then
+        echo "Error: headerDir value not found or is null in cpkg-pack.json. Invalid Package"
+        exit 1
+    else
+        echo "headerDir: $headerDir"
+    fi
 
-    # Download the updated source file using curl
-    curl -s "$source" -o package.cpkg
+    libSource="${source/cpkg-pack.json/$headerDir}"
+    echo "libSource: $libSource"
+
+    # Fetch each .h file and save it
+    headerFiles=$(jq -r '.headerFiles[]' "$packageFile")
+    if [ -z "$headerFiles" ]; then
+        echo "No header files found in cpkg-pack.json."
+    else
+        while IFS= read -r hFile; do
+            echo "Downloading $hFile"
+            curl -s "$libSource$hFile" -o "$hFile"
+        done <<< "$headerFiles"
+    fi
 
     echo "Package installation complete."
+    rm "$packageFile"
 }
 
 function show_help {
-    echo "Usage: cpkg install <packageName> [-o <outPutDirectory>]"
+    echo "Usage: cpkg install <packageName> [-o <outputDirectory>]"
 }
 
 if [ "$1" == "install" ]; then
