@@ -48,8 +48,8 @@ function install_package {
     # Replace the filename with the headerDir value in the source URL
     source="${source%/*}/$headerDir"
 
-    # Actual installation logic goes here
-    # You can use the updated source value for installation
+    # Download the updated source file using curl
+    curl -s "$source" -o package.cpkg
 
     echo "Package installation complete."
 }
