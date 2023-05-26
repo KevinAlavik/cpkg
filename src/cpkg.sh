@@ -1,22 +1,55 @@
 #!/bin/bash
 
-packageSource = https://puffer.is-a.dev/cpkg/source.json
+packageSource="https://puffer.is-a.dev/cpkg/source.json"
+
+function fetch_package_source {
+    echo "Fetching package source: $packageSource"
+    curl -s "$packageSource" -o source.json
+}
+
+function get_source_for_package {
+    packageName=$1
+
+    source=$(jq -r --arg pkg "$packageName" '.packages[] | select(.name == $pkg) | .source' source.json)
+    if [ -z "$source" ]; then
+        echo "Package '$packageName' not found in the package source."
+        exit 1
+    fi
+
+    echo "$source"
+}
 
 function install_package {
     packageName=$1
     outputDirectory=$2
+    source=$3
 
     echo "Installing package: $packageName"
-    
+
     if [ -z "$outputDirectory" ]; then
-        echo "Output directory not specified. Installing in current directory."
+        echo "Output directory not specified. Installing in the current directory."
+        outputDirectory="."
     else
         echo "Installing in directory: $outputDirectory"
         mkdir -p "$outputDirectory"
         cd "$outputDirectory" || exit
     fi
 
-    
+    # Download the source file using curl
+    curl -s "$source" -o package.cpkg
+
+    # Get the headerDir value from package.cpkg
+    headerDir=$(jq -r '.headerDir' package.cpkg)
+    if [ -z "$headerDir" ]; then
+        echo "Error: headerDir value not found in the package source file. Invalid Package"
+        exit 1
+    fi
+
+    # Replace the filename with the headerDir value in the source URL
+    source="${source%/*}/$headerDir"
+
+    # Actual installation logic goes here
+    # You can use the updated source value for installation
 
     echo "Package installation complete."
 }
@@ -42,7 +75,16 @@ if [ "$1" == "install" ]; then
         outputDirectory=$4
     fi
 
-    install_package "$packageName" "$outputDirectory"
+    fetch_package_source
+
+    source=$(get_source_for_package "$packageName")
+
+    if [ -z "$source" ]; then
+        echo "Package '$packageName' not found in the package source."
+        exit 1
+    fi
+
+    install_package "$packageName" "$outputDirectory" "$source"
 elif [ "$1" == "--help" ]; then
     show_help
 else
