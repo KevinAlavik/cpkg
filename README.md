@@ -1,5 +1,5 @@
 # cpkg
-Package manager for C
+Package manager for C/C++
 
 ## Installing
 Just run
