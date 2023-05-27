@@ -107,13 +107,12 @@ if [ "$1" == "install" ]; then
 elif [ "$1" == "--help" ]; then
     show_help
 elif [ "$1" == "run" ]; then
-    sudo 
     if [ -z "$2" ]; then
         echo "C file path not provided."
         exit 1
     fi
 
-    gcc $2 -o tmp/cpkg-compiled
+    sudo gcc $2 -o tmp/cpkg-compiled
     sudo bash tmp/cpkg-compiled
     sudo rm -rf tmp/cpkg-compiled
 else
