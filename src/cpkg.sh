@@ -113,7 +113,7 @@ elif [ "$1" == "run" ]; then
     fi
 
     sudo gcc $2 -o tmp-compiled > /dev/null
-    ./tmp-compiled
+    ./tmp-compiled $3
     sudo rm tmp-compiled > /dev/null
 else
     echo "Invalid command."
