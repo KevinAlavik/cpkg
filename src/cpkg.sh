@@ -112,9 +112,9 @@ elif [ "$1" == "run" ]; then
         exit 1
     fi
 
-    sudo gcc $2 -o tmp/cpkg-compiled
-    sudo bash tmp/cpkg-compiled
-    sudo rm -rf tmp/cpkg-compiled
+    sudo gcc $2 -o tmp-compiled > /dev/null
+    ./tmp-compiled
+    sudo rm tmp-compiled > /dev/null
 else
     echo "Invalid command."
     show_help
