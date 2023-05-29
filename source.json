@@ -11,6 +11,10 @@
         {
             "name": "colors",
             "source": "https://puffer.is-a.dev/cpkg/packages/colors/cpkg-pack.json"
+        },
+        {
+            "name": "requests",
+            "source": "https://puffer.is-a.dev/cpkg/packages/request/cpkg-pack.json"
         }
     ]
 }

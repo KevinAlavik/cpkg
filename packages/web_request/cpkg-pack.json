@@ -1,0 +1,6 @@
+{
+    "headerDir": "lib/",
+    "headerFiles": [
+        "web_request.h"
+    ]
+}
