@@ -13,8 +13,8 @@
             "source": "https://puffer.is-a.dev/cpkg/packages/colors/cpkg-pack.json"
         },
         {
-            "name": "requests",
-            "source": "https://puffer.is-a.dev/cpkg/packages/request/cpkg-pack.json"
+            "name": "web_request",
+            "source": "https://puffer.is-a.dev/cpkg/packages/web_request/cpkg-pack.json"
         }
     ]
 }
