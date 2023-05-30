@@ -15,6 +15,10 @@
         {
             "name": "web_request",
             "source": "https://puffer.is-a.dev/cpkg/packages/web_request/cpkg-pack.json"
+        }.
+        {
+            "name": "lazy",
+            "source": "https://puffer.is-a.dev/cpkg/packages/lazy/cpkg-pack.json"
         }
     ]
 }
