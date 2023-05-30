@@ -72,8 +72,47 @@ function install_package {
 }
 
 function show_help {
-    echo "Usage: cpkg install <packageName> [-o <outputDirectory>]"
+    echo "Usage: cpkg [command] [options]"
+    echo ""
+    echo "Commands:"
+    echo "  install <packageName>     Install a package"
+    echo "  init -o <outputDirectory> Initialize a new cpkg package"
+    echo "  run <cFilePath>           Compile and run a C file"
+    echo ""
+    echo "Options:"
+    echo "  -o <outputDirectory>      Specify output directory for installation or initialization"
 }
+
+
+function init {
+    if [ "$2" != "-o" ]; then
+        echo "Invalid command. Please use the '-o' flag followed by the output directory."
+        exit 1
+    fi
+
+    if [ -z "$3" ]; then
+        echo "Output directory not provided."
+        exit 1
+    fi
+
+    outputDirectory="$3"
+
+    echo "Initializing cpkg package in $outputDirectory"
+    mkdir "$outputDirectory" > /dev/null
+    cd "$outputDirectory"
+    cat <<EOF > cpkg-pack.json
+{
+    "headerDir": "lib/",
+    "headerFiles": [
+        "myPackage.h"
+    ]
+}
+EOF
+    mkdir lib/
+    touch lib/myPackage.h
+    exit 0
+}
+
 
 if [ "$1" == "install" ]; then
     if [ -z "$2" ]; then
@@ -106,13 +145,15 @@ if [ "$1" == "install" ]; then
     rm source.json
 elif [ "$1" == "--help" ]; then
     show_help
+elif [ "$1" == "init" ]; then
+    init "$@"
 elif [ "$1" == "run" ]; then
     if [ -z "$2" ]; then
         echo "C file path not provided."
         exit 1
     fi
 
-    sudo gcc $2 -o tmp-compiled > /dev/null
+    sudo gcc "$2" -o tmp-compiled > /dev/null
     ./tmp-compiled
     sudo rm tmp-compiled > /dev/null
 else
