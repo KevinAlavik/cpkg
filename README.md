@@ -2,11 +2,19 @@
 Package manager for C/C++
 
 ## Installing
-Just run
+
+Install via script:
 ```bash
 bash -c "$(curl -fsSL https://puffer.is-a.dev/cpkg/install.sh)"
 ```
-
+Install using [pot](https://github.com/kevinalavik/pot):
+```shell
+sudo pot install cpkg
+```
+or
+```shell
+sudo pot install cpkg@0.1.0
+```
 ## Packages
 - test-pkg
 - test-pkg2
