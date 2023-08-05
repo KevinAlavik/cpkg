@@ -1,0 +1,7 @@
+{
+    "headerDir": "lib/",
+    "includeDir": "libkfd/",
+    "headerFiles": [
+        "libkfd.h"
+    ]
+}
