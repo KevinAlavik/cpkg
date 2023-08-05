@@ -19,6 +19,10 @@
         {
             "name": "lazy",
             "source": "https://puffer.is-a.dev/cpkg/packages/lazy/cpkg-pack.json"
+        },
+        {
+            "name": "libkfd",
+            "source": "https://puffer.is-a.dev/cpkg/packages/libkfd/cpkg-pack.json"
         }
     ]
 }
