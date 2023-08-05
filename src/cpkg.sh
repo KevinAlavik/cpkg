@@ -68,7 +68,7 @@ function install_package {
 
     # Include additional directories for header files if specified
     includeDir=$(jq -r '.includeDir' "$packageFile")
-    if [ -n "$includeDir" ]; then
+    if [ -n "$includeDir" ] && [ -d "lib" ]; then
         echo "Include additional directory: $includeDir"
         mkdir -p "$includeDir"
         cp -r lib/* "$includeDir"
@@ -76,7 +76,7 @@ function install_package {
 
     echo "Package installation complete."
     
-    rm "$packageFile"
+    rm "$packageFile" source.json
 }
 
 function show_help {
