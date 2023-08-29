@@ -23,6 +23,10 @@
         {
             "name": "libkfd",
             "source": "https://puffer.is-a.dev/cpkg/packages/libkfd/cpkg-pack.json"
+        },
+        {
+            "name": "cdisplay",
+            "source": "http://puffer.is-a.dev/cdisplay/cpkg-pack.json"
         }
     ]
 }
