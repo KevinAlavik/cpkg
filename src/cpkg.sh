@@ -76,7 +76,7 @@ function install_package {
 
     echo "Package installation complete."
     
-    rm "$packageFile" source.json
+    rm -f "$packageFile" source.json
 }
 
 function show_help {
